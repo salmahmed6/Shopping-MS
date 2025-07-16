@@ -69,11 +69,8 @@ class CustomerRepository {
 
   async FindCustomerById({ id }) {
     try {
-      const existingCustomer = await CustomerModel.findById(id)
-        .populate("address")
-        .populate("wishlist")
-        .populate("orders")
-        .populate("cart.product");
+      const existingCustomer = await CustomerModel.findById(id).populate("address")
+
       return existingCustomer;
     } catch (err) {
       throw new APIError(
@@ -101,6 +98,9 @@ class CustomerRepository {
   }
 
   async AddWishlistItem(customerId, product) {
+
+
+
     try {
       const profile = await CustomerModel.findById(customerId).populate(
         "wishlist"
